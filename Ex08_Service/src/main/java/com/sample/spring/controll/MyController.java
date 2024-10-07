@@ -7,14 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sample.spring.dao.ISimpleBbsDao;
+import com.sample.spring.service.ISimpleBbsService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class MyController {
 
-	@Autowired
-	ISimpleBbsDao dao;
+//	@Autowired
+//	ISimpleBbsDao dao;
+	
+	@Autowired 
+	ISimpleBbsService bbs;
 	
 	@RequestMapping("/")
 	public String root() {
@@ -23,15 +27,15 @@ public class MyController {
 	
 	@RequestMapping("/list")
 	public String listPage(Model model) {
-		model.addAttribute("list",dao.listDao());
-		model.addAttribute("count", dao.countDao());
+		model.addAttribute("list",bbs.list());
+		model.addAttribute("count", bbs.count());
 		return "list";
 	}
 	
 	@RequestMapping("/view")//view?id=1
 	public String view(HttpServletRequest request, Model model) {
 		String sId = request.getParameter("id");
-		model.addAttribute("dto",dao.viewDao(sId));
+		model.addAttribute("dto",bbs.view(sId));
 		return "view";
 	}
 	
@@ -42,7 +46,7 @@ public class MyController {
 	
 	@RequestMapping("/write")
 	public String write(HttpServletRequest request) {
-		dao.writeDao(
+		bbs.write(
 				request.getParameter("writer"), 
 				request.getParameter("title"), 
 				request.getParameter("content")
@@ -53,7 +57,7 @@ public class MyController {
 	
 	@RequestMapping("/delete")
 	public String delete(HttpServletRequest request) {
-		dao.delete(request.getParameter("id"));
+		bbs.delete(request.getParameter("id"));
 		return "redirect:list";
 	}
 }
