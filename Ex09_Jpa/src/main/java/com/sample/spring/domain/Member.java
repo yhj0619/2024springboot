@@ -28,5 +28,6 @@ public class Member {
 	
 	@Column(name="newEmail")
 	private String email;
+	
 	private LocalDate createDate;
 }
