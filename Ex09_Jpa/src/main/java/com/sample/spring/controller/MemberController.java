@@ -79,6 +79,7 @@ public class MemberController {
 			@RequestParam("page") String page,
 			Model model
 			) {
+//		console 출력
 		System.out.println("/----------------------" + search + "-----------------------/");
 		System.out.println("/----------------------" + page + "-----------------------/");
 		
