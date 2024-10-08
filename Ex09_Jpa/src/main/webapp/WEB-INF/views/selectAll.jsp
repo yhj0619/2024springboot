@@ -9,8 +9,7 @@
 </head>
 <body>
 	<c:forEach var="member" items="${members}">
-		${member.id } <br>
-		${member.name} <br> ${member.email }
+${member.id } / ${member.name} / ${member.email }
 		<hr>
 	</c:forEach>
 </body>
