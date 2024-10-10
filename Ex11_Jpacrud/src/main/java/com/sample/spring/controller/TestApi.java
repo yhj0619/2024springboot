@@ -66,11 +66,13 @@ public class TestApi {
 		testService.delete(id);
 	}
 	
+//	방법 1 - 단순 예제
 //	@GetMapping("/test")
 //	public List<TestEntity> jsonData(){
 //		return testService.findAll(); //200 ok
 //	}
 	
+//	방법 2 - ResponseEntity 이용 예제
 	@GetMapping("/test")
 	public ResponseEntity<List<TestEntity>> jsonData(){
 		List<TestEntity> data = testService.findAll();
