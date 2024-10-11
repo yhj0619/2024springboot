@@ -36,7 +36,7 @@ public class FoodApi {
 		return foodService.getFoodDetail(foodId);
 	}
 
-	//request로 dto를 받음
+	//request로 dto를 받아서 쓰기
 	@PostMapping("/food")
 	public FoodEntity postFood(
 			@RequestBody CreateAndEditFoodRequest request
