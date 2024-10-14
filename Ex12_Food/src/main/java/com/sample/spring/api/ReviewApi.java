@@ -39,7 +39,7 @@ public class ReviewApi {
 	}
 	
 	@GetMapping("/food/{foodId}/reviews")
-	public ReviewDto getFoodReviews(
+	public ReviewDto getfoodReviews(
 			@PathVariable("foodId") Long foodId,
 			@RequestParam("offset") Integer offset,
 			@RequestParam("limit") Integer limit

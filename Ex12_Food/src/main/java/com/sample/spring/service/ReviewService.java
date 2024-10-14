@@ -40,7 +40,7 @@ public class ReviewService {
 		reviewRepository.delete(review);
 	}
 	
-	public ReviewDto getFoodReview(Long foodId, Pageable page) { //
+	public ReviewDto getFoodReview(Long foodId,Pageable page) { //
 		Double avgScore = reviewRepository.getAvgScoreByFoodId(foodId);
 		
 		Slice<ReviewEntity> reviews = reviewRepository.findSliceByFoodId(foodId, page);
@@ -48,11 +48,13 @@ public class ReviewService {
 		return ReviewDto.builder()
 				.avgScore(avgScore)
 				.reviews(reviews.getContent())
-				.page(ReviewDto.ReviewDtoPage.builder()
+				.page(
+						ReviewDto.ReviewDtoPage.builder()
 						.offset(page.getPageNumber() * page.getPageSize())
 						.limit(page.getPageSize())
 						.build()
 						)
 				.build();
 	}
+
 }

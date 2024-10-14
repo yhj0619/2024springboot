@@ -20,17 +20,17 @@ public class ReviewRepositoryImpl implements ReviewRepositoryCustom{
 	
 	@Override
 	public Slice<ReviewEntity> findSliceByFoodId(Long foodId, Pageable page) {
-		// TODO Auto-generated method stub
 		List<ReviewEntity> reviews = queryFactory.select(QReviewEntity.reviewEntity)
 				.from(QReviewEntity.reviewEntity)
 				.where(QReviewEntity.reviewEntity.foodId.eq(foodId))
-				.offset((long)page.getPageNumber() * page.getPageSize()) //0page * 10pagesize = 0임/ offset은 이후임!
-				.limit(page.getPageSize() + 1) //pagesize 크기를 지정
+				.offset((long) page.getPageNumber() * page.getPageSize()) //0page * 10pagesize //5
+				.limit(page.getPageSize() + 1)
 				.fetch();
+		
 		return new SliceImpl<>(
 				reviews.stream().limit(page.getPageSize()).toList(),
 				page,
-				reviews.size() > page.getPageSize() //next page가 있으면 true
+				reviews.size() > page.getPageSize()
 				);
 	}
 
