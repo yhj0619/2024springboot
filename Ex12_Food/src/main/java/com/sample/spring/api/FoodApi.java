@@ -1,6 +1,5 @@
 package com.sample.spring.api;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,6 @@ import com.sample.spring.api.response.FoodDetailView;
 import com.sample.spring.api.response.FoodView;
 import com.sample.spring.model.FoodEntity;
 import com.sample.spring.service.FoodService;
-
-import jakarta.persistence.Entity;
 
 @RestController
 public class FoodApi {
