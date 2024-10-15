@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.sample.spring.dto.PageRequestDto;
 import com.sample.spring.model.TodoEntity;
 
 import lombok.extern.log4j.Log4j2;
@@ -66,8 +67,9 @@ public class TodoRepositoryTest {
 //		log.info(result.getTotalElements());
 //		log.info(result.getContent());
 //	}
-	@Test
-	public void testSearch1() {
-		todoRepository.search1();
-	}
+	
+//	@Test
+//	public void testSearch1() {
+//		todoRepository.search1();
+//	}
 }

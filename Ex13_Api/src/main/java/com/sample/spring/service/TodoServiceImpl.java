@@ -1,10 +1,15 @@
 package com.sample.spring.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import com.sample.spring.dto.PageRequestDto;
+import com.sample.spring.dto.PageResponseDto;
 import com.sample.spring.dto.TodoDto;
 import com.sample.spring.model.TodoEntity;
 import com.sample.spring.repository.TodoRepository;
@@ -46,5 +51,21 @@ public class TodoServiceImpl implements TodoService{
 	@Override
 	public void remove(Long tno) {
 		todoRepository.deleteById(tno);
+	}
+
+	@Override
+	public PageResponseDto<TodoDto> getList(PageRequestDto pageRequestDto) {
+		
+		Page<TodoEntity> result = todoRepository.search1(pageRequestDto);
+		
+		List<TodoDto> dtoList = result.get().map(todo -> entityToDto(todo)).collect(Collectors.toList());
+		
+		PageResponseDto<TodoDto> responseDto = PageResponseDto.<TodoDto>withAll()
+				.dtoList(dtoList)
+				.pageRequestDto(pageRequestDto)
+				.total(result.getTotalElements())
+				.build();
+		
+		return responseDto;
 	}
 }

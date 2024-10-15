@@ -1,5 +1,7 @@
 package com.sample.spring.service;
 
+import com.sample.spring.dto.PageRequestDto;
+import com.sample.spring.dto.PageResponseDto;
 import com.sample.spring.dto.TodoDto;
 import com.sample.spring.model.TodoEntity;
 
@@ -11,6 +13,8 @@ public interface TodoService {
 	public void modify(TodoDto dto);
 	
 	public void remove(Long tno);
+	
+	public PageResponseDto<TodoDto> getList(PageRequestDto pageRequestDto);
 	
 	//Entity에서 Dto로, Dto에서 Entity로 서로 주고받는 값을 미리 정의
 	//post
