@@ -1,14 +1,15 @@
 package com.sample.spring.controller;
 
 import java.io.IOException;
+import java.net.http.HttpHeaders;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +18,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sample.spring.domain.FileEntity;
 import com.sample.spring.service.FileDataService;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class FileController {
 	
@@ -47,17 +50,34 @@ public class FileController {
 	}
 	
 	@GetMapping("/file/{id}")
-	public ResponseEntity<?> downImage(
+	public ResponseEntity<byte[]> downImage(
 			@PathVariable("id") Long id
 			) throws IOException{
-		byte[] downloadImage = fileDataService.downLoadImageFileSystem(id);
+		byte[] downLoadImage = fileDataService.downLoadImageFileSystem(id);
 		
-		if(downloadImage != null) {
+		if(downLoadImage != null) {
+		
 			return ResponseEntity.status(HttpStatus.OK)
 					.contentType(MediaType.valueOf("image/png"))
-					.body(downloadImage);
-		} else {
+					.body(downLoadImage);
+			
+		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
+		
 	}
+	
+	@GetMapping("/filelist")
+	public ResponseEntity<List<FileEntity>> getFileDataList(){
+		
+		List<FileEntity> fileDataList = fileDataService.findAll();
+		
+		if(!fileDataList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.OK).body(fileDataList);
+		}else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		}
+	}
+	
+	
 }
