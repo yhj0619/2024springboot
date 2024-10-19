@@ -34,9 +34,9 @@ public class JWTcheckFilter extends OncePerRequestFilter {
 			return true;
 		}
 		
-//		if(path.startsWith("/test")) {
-//			return true;
-//		}
+		if(path.startsWith("/test")) {
+			return false;
+		}
 		
 		return false;
 	}
@@ -81,9 +81,7 @@ public class JWTcheckFilter extends OncePerRequestFilter {
 			} catch (Exception e) {
 				
 				log.info("JWT check error");
-				
-				
-				
+
 				Gson gson = new Gson();
 				
 				String jsonStr = gson.toJson(Map.of("error","ERROR_ACCESS_TOKEN"));
@@ -92,11 +90,6 @@ public class JWTcheckFilter extends OncePerRequestFilter {
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print(jsonStr);
 				printWriter.close();
-				
 			}
-			
-			
-			
 	}
-
 }
