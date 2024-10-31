@@ -1,8 +1,5 @@
 package com.sample.spring.security;
 
-
-
-
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -44,9 +41,7 @@ public class CustomUserDetailService implements UserDetailsService{
 					.stream().map(memberRole -> memberRole.name())
 					.collect(Collectors.toList()));
 
-		
 		log.info(memberDto);
-		
 		
 		return memberDto;
 	}
